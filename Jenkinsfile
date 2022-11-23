@@ -8,6 +8,10 @@ pipeline {
 
   }
 
+  environnement {
+     couleur = "bleu"
+  }
+
   stages {
     stage('Lister les étapes') {
       steps {
@@ -22,7 +26,7 @@ pipeline {
     }
     stage('Utilisation des variables') {
      steps {
-       echo "BUILD_NUMBER = ${env.UTILISATEUR}"
+       sh 'printenv'
      }
     }
 
