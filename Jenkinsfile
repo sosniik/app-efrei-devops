@@ -22,7 +22,7 @@ pipeline {
     }
     stage('Utilisation des variables') {
      steps {
-       sh 'printenv'
+       echo "BUILD_NUMBER = ${env.UTILISATEUR}"
      }
     }
 
