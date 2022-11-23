@@ -9,9 +9,7 @@ pipeline {
   }
 
   stages {
-
-    stage('Hello') {
-
+    stage('Lister les étapes') {
       steps {
 
         sh '''
@@ -21,7 +19,11 @@ pipeline {
         '''
 
       }
-
+    }
+    stage('Utilisation des variables') {
+     steps {
+       echo(env.UTILISATEUR)
+     }
     }
 
   }
