@@ -22,7 +22,7 @@ pipeline {
     }
     stage('Utilisation des variables') {
      steps {
-       echo(env.UTILISATEUR)
+       sh 'printenv'
      }
     }
 
