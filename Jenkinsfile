@@ -10,6 +10,7 @@ pipeline {
 
   environment {
      couleur = "bleu"
+     utilisateur = "Leo"
   }
 
   stages {
@@ -26,7 +27,7 @@ pipeline {
     }
     stage('Utilisation des variables') {
      steps {
-       echo "The current build number is ${env.UTILISATEUR}"
+       echo "La couleur est ${couleur} pour l'utilisateur ${utilisateur}"
      }
     }
 
