@@ -26,7 +26,7 @@ pipeline {
     }
     stage('Utilisation des variables') {
      steps {
-       sh 'printenv'
+       echo "The current build number is ${env.UTILISATEUR}"
      }
     }
 
