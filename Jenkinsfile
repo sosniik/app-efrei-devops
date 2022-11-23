@@ -8,7 +8,7 @@ pipeline {
 
   }
 
-  environnement {
+  environment {
      couleur = "bleu"
   }
 
