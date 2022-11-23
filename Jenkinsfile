@@ -28,10 +28,12 @@ pipeline {
     stage('Utilisation des variables') {
     environment {
          loisir = "Skate"
+         couleur = "Rouge"
       }
      steps {
        echo "La couleur est ${couleur} pour l'utilisateur ${utilisateur}"
        echo "${loisir}"
+       echo "${couleur}"
      }
     }
 
