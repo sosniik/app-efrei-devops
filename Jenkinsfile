@@ -27,7 +27,6 @@ pipeline {
     }
     stage('Utilisation des variables') {
     environment {
-         loisir = "Skate"
          couleur = "Rouge"
       }
      steps {
