@@ -39,3 +39,4 @@ RUN chmod +x /*.sh
 #EXPOSE 8080
 
 CMD ["/run.sh"]
+
