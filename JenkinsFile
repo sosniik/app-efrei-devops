@@ -1,39 +1,35 @@
 pipeline {
-
-  agent any
-
-  options {
-
-    buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')
-
-  }
-
-  environment {
-     couleur = "bleu"
-     utilisateur = "Leo"
-  }
-
-  stages {
-    stage('Lister les étapes') {
-      steps {
-
-        sh '''
-          java -version
-        '''
-
-      }
+    tools {
+        maven 'maven'
+        jdk 'sosnik_JDK'
     }
-    stage('Utilisation des variables') {
-    environment {
-         couleur = "Rouge"
-      }
-     steps {
-       echo "La couleur est ${couleur} pour l'utilisateur ${utilisateur}"
-       echo "${loisir}"
-       echo "${couleur}"
-     }
+    agent any
+    stages {
+        stage("git checkout"){
+            steps {
+                git credentialsId: 'git_credentials',url:'https://github.com/sosniik/app-efrei-devops.git'
+            }
+        }
+        stage("Build the Application") {
+            steps {
+                bat "mvn clean install"
+            }
+        }
+        stage('Unit Test Execution') {
+            steps{
+                bat 'mvn test'
+            }
+        }
+        stage('Build the docker image') {
+            steps {
+                bat 'docker build -tagsosnik/app-efrei-devops .'
+                withCredentials([string(credentialsId: 'dockerhubpass', variable:'dockerHubPass')]){
+                    sh "docker login-usosnik -p $dockerHubPass"
+                }
+                sh 'docker push sosnik/app-efrei-devops'
+                sh 'docker scan'
+            }
+        }
+
     }
-
-  }
-
 }
